@@ -23,7 +23,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import filedialog as fd
-from tkinter import tix
+# import Pmw
 
 
 def test():
@@ -409,7 +409,8 @@ def import_csv():
     
 #%% TkInter GUI components
 # Set-up the main window
-window = tix.Tk()
+
+window = tk.Tk()
 window.title("BL2 Gun Damage")
 window.resizable(width=False, height=False)
 
@@ -558,22 +559,21 @@ frm_controls.grid(row=1, column=0, padx=15, pady=0)
 frm_output.grid(row=2, column=0, padx=15, pady=15)
 
 #%% Child window used for comparing guns
-from tkinter import tix
 
-compare = tix.Toplevel(window)
+compare = tk.Toplevel(window)
 compare.geometry('1350x400')
 compare.resizable(width=True, height=True)
 compare.title("BL2 Gun Damage Comparison")
 # row 0
-frame1 = tix.Frame(compare)
-l1 = tix.Label(frame1, text=' ')
+frame1 = tk.Frame(compare)
+l1 = tk.Label(frame1, text=' ')
 l1.grid(column=1, row=0)
-l8 = tix.Label(frame1, text="Elemental", justify='center',
+l8 = tk.Label(frame1, text="Elemental", justify='center',
               bg="yellow")
 l8.grid(column=8, row=0, sticky='ew')
-l9 = tix.Label(frame1, text=' ')
+l9 = tk.Label(frame1, text=' ')
 l9.grid(column=9, row=0)
-l10 = tix.Label(frame1, text="Damage per Second", justify='right',
+l10 = tk.Label(frame1, text="Damage per Second", justify='right',
                bg='sky blue')
 l10.grid(column=10, row=0, sticky='ew')
 frame1.columnconfigure(1, {'minsize': 600})
@@ -628,39 +628,39 @@ gun_comp.heading("dps_avg",text="Average",anchor='center')
 gun_comp.grid(row=1, column=0, sticky='ew')
 
 # row 2
-frame2 = tix.Frame(compare)
+frame2 = tk.Frame(compare)
 
-btn_import = tix.Button(frame2, text="  Import   ",  command=import_csv)
+btn_import = tk.Button(frame2, text="  Import   ",  command=import_csv)
 btn_import.grid(row=1, column=0, sticky='ew', padx=10, pady=5)
 btn_import.config(bg="sky blue", fg="black")
 
-btn_export = tix.Button(frame2, text="   Export   ", command=export)
+btn_export = tk.Button(frame2, text="   Export   ", command=export)
 btn_export.grid(row=1, column=1, sticky='ew', padx=10, pady=5)
 btn_export.config(bg="sky blue", fg="black")
 
-btn_sort = tix.Button(frame2, text="   Sort   ", command=sort_damage)
+btn_sort = tk.Button(frame2, text="   Sort   ", command=sort_damage)
 btn_sort.grid(row=1, column=2, sticky='ew', padx=10, pady=5)
 btn_sort.config(bg="sky blue", fg="black")
 
-btn_del = tix.Button(frame2, text="   Delete Selected   ", command=delete_row)
+btn_del = tk.Button(frame2, text="   Delete Selected   ", command=delete_row)
 btn_del.grid(row=1, column=3, sticky='ew', padx=10, pady=5)
 btn_del.config(bg="tomato2", fg="black")
 
-btn_clear = tix.Button(frame2, text="   Clear All   ", command=clear_compare)
+btn_clear = tk.Button(frame2, text="   Clear All   ", command=clear_compare)
 btn_clear.grid(row=1, column=4, sticky='ew', padx=10, pady=5)
 btn_clear.config(bg="tomato2", fg="black")
 
 #Create and bind tooltips
-tip_del = tix.Balloon(compare)
-tip_del.bind_widget(btn_del, balloonmsg="Delete selected row")
-tip_exp = tix.Balloon(compare)
-tip_exp.bind_widget(btn_export, balloonmsg="Export to csv file")
-tip_imp = tix.Balloon(compare)
-tip_imp.bind_widget(btn_import, balloonmsg="Import from csv file")
-tip_clr = tix.Balloon(compare)
-tip_clr.bind_widget(btn_clear, balloonmsg="Clear all items from table")
-tip_srt = tix.Balloon(compare)
-tip_srt.bind_widget(btn_sort, balloonmsg="Sort items by average damage (descending)")
+# tip_del = Pmw.Balloon(compare)
+# tip_del.bind(btn_del, "Delete selected row")
+# tip_exp = Pmw.Balloon(compare)
+# tip_exp.bind(btn_export, "Export to csv file")
+# tip_imp = Pmw.Balloon(compare)
+# tip_imp.bind(btn_import, "Import from csv file")
+# tip_clr = Pmw.Balloon(compare)
+# tip_clr.bind(btn_clear, "Clear all items from table")
+# tip_srt = Pmw.Balloon(compare)
+# tip_srt.bind(btn_sort, "Sort items by average damage (descending)")
 
 frame2.grid(row=2)
 
