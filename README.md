@@ -27,16 +27,21 @@ Here is a typical weapon card for a gun in BL2.
 I designed the GUI for my damage app to follow the flow of the information on the weapon cards. 
 
 ### Basic Damage  
-Also called kinetic or projectile damage, it is the damage done purely by the bullets or pellets that hit the target.  For most guns a single "Damage" number is given.  A succcessful hit will do about this much damage to the target.  For some guns, especially shotguns, a second number is shown next to the damage, for example; "653 x 13".  The second number is the number of pellets.  For the example given, each "shot" fires 13 pellets, each of which can do 653 damage. This impressive potential is rarely achieved since shotguns are not very accurate.   Some guns shoot multiple rounds per shot.  This is shown on the weapon card as "Consumes X ammo per shot".  This extra ammo you're shooting doesn't change the damage per shot, it's already factored in.  What it does is increase the rate of ammo usage and means you will burn through a magazine quicker.   
+Also called kinetic or projectile damage, it is the damage done purely by the bullets or pellets that hit the target.  For most guns a single "Damage" number is given.  A succcessful hit will do about this much damage to the target.  For some guns, especially shotguns, a second number is shown next to the damage, for example; "653 x 13".  The second number is the number of pellets.  For the example given, each "shot" fires 13 pellets, each of which does 653 damage. This impressive potential is rarely achieved since shotguns are not very accurate.   Some guns shoot multiple rounds per shot.  This is shown on the weapon card as "Consumes X ammo per shot".  This extra ammo you're shooting doesn't change the damage per shot, it's already factored in.  What it does is increase the rate of ammo usage and means you will burn through a magazine quicker.   
 #### Definitions:  
 $dmg =$ damage from a single bullet or pellet.   
 $dpel =$ number of pellets per shot, shown as 'x dpel' on the weapon card.
 $acc =$ accuracy %.  A well aimed shot should hit the target this percent of the time.  Affected by distance to target and weapon zoom.  
 $fr =$ fire rate.  Maximum shots per second possible.  Semi-automatic guns (e.g. most pistols) require a trigger pull for each shot.  If you're slow on the trigger, you might not achieve the stated fire rate.   
 $rs =$ reload speed.  The time in seconds to reload the gun.   
-$mag =$ magazine size.  The number of rounds in a full magazine.   
-
-$D_{kinetic} =$  TBD
+$mag =$ magazine size.  The number of rounds in a full magazine.  
+$bpsh =$ ammo per shot.  
+$fac =$ target damage factor.  For kinetic damage, the factors are 1.0 for flesh and shields and 0.8 for armor.  
+  
+$t_{firing}=\frac{mag}{fr \cdot  bpsh}$ The time it takes to empty a full magazine.   
+  
+$$DPS_{kinetic} = \frac{fac * dmg * dpel * \frac{mag}{bpsh} * \frac{acc}{100}}{rs+t_{firing} }$$
+Average damage per second over a full fire /reload cycle.
 
 
 ### Elemental Damage
