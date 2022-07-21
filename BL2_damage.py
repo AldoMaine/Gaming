@@ -23,7 +23,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
 from tkinter import filedialog as fd
-# import Pmw
+import Pmw
 
 
 def test():
@@ -651,16 +651,16 @@ btn_clear.grid(row=1, column=4, sticky='ew', padx=10, pady=5)
 btn_clear.config(bg="tomato2", fg="black")
 
 #Create and bind tooltips
-# tip_del = Pmw.Balloon(compare)
-# tip_del.bind(btn_del, "Delete selected row")
-# tip_exp = Pmw.Balloon(compare)
-# tip_exp.bind(btn_export, "Export to csv file")
-# tip_imp = Pmw.Balloon(compare)
-# tip_imp.bind(btn_import, "Import from csv file")
-# tip_clr = Pmw.Balloon(compare)
-# tip_clr.bind(btn_clear, "Clear all items from table")
-# tip_srt = Pmw.Balloon(compare)
-# tip_srt.bind(btn_sort, "Sort items by average damage (descending)")
+tip_del = Pmw.Balloon(compare)
+tip_del.bind(btn_del, "Delete selected row")
+tip_exp = Pmw.Balloon(compare)
+tip_exp.bind(btn_export, "Export to csv file")
+tip_imp = Pmw.Balloon(compare)
+tip_imp.bind(btn_import, "Import from csv file")
+tip_clr = Pmw.Balloon(compare)
+tip_clr.bind(btn_clear, "Clear all items from table")
+tip_srt = Pmw.Balloon(compare)
+tip_srt.bind(btn_sort, "Sort items by average damage (descending)")
 
 frame2.grid(row=2)
 
