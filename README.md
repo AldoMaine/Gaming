@@ -1,7 +1,5 @@
 # Borderland 2 Gun Damage Calculator App
 
-...a work in progress....  
-
 ## Introduction
 A basic Python app using the TkInter library to compute the damage per second (DPS) for guns in Borderlands 2. While I agree that field testing a gun is the best way to see if it works well for you, sometimes you want a quick way to compare several guns. 
 
@@ -87,7 +85,7 @@ Highly effective against shields. 2 second duration.
 Highly effective against armored targets. 8 second duration. 
 
 #### Slag damage
-Doubles other damage types once a target is slagged.  8 second duration.  
+Doubles other damage types once a target is slagged.  8 second duration.  Even though slagging is said to double *all* other types of damage, for this app I just double the kinetic damage done while a target is slagged. For simplicities sake.   I've found that a good tactic with tough enemies is to slag them then switch to a gun that does more damage and pour it on. 
 
 #### Explosive damage
 Doubles kinetic damage.  Can cause splash explosive damage nearby targets. 
