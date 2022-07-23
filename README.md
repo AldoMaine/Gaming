@@ -53,11 +53,11 @@ In BL2 there are several types of "elemental" damage that some guns can inflict;
 
 The effectiveness of elementals depends on the type of target.  Flesh targets are strongly affected by incendiary effects but not so much by corrosive effect. 
 
-#### Procs (Programmed Random Occurence)
+#### Procs (Programmed Random Occurences)
 Incendiary, Shock, Corrosive and Slag elemental effects happen based on random chance.  This is shown on the weapon card as "Corrode chance 37.5%" for example. This means that for every bullet or pellet that hits the target there is an x% chance that an elemental effect will occur.  We call these "procs".  Procs last for varying amounts of time based on the elemental type.  Multiple procs can be in effect concurrently.  You can see this effect if you try your elemental weapon at Marcus's range.  Keep firing and watch the damage numbers flying off the unfortunate target multiply.
 
 In the spreadsheet caclulators I've seen elemental damage chance is simply applied as a factor.  This implies that every bullet does elemental damage but at a reduced rate based on the chance percentage.  It does not allow for concurrent procs or their timelines.  To better simulate elemental effects and their procs I took a different approach.  
-* I simulate 1000 firing cycles. A firing cycle consists of the time it takes to fire all the shots in the magazine plus the reload time.  I do 1000 cycle becasue of the random nature of the procs.  The first cycle might trigger no procs.  The 13th might trigger several.  If I do enough, I can average it out. 
+* I simulate 1000 firing cycles. A firing cycle consists of the time it takes to fire all the shots in the magazine plus the reload time.  I do 1000 cycles becasue of the random nature of the procs.  The first cycle might trigger no procs.  The 13th might trigger several.  If I do enough, I can average it out. 
 * Each second is divided into ticks because that is how BL2 handles time internally.  A tick in BL2 is 1/3 of a second. So 10 seconds equals 30 ticks.
 * The simulation is just a long list of 1's and zeros.  A 1 means the gun is firing during that tick and a zero means it isn't.
 * The code steps through each tick in the simulation list.
