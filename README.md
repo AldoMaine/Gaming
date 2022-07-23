@@ -54,19 +54,53 @@ In BL2 there are several types of "elemental" damage that some guns can inflict;
 The effectiveness of elementals depends on the type of target.  Flesh targets are strongly affected by incendiary effects but not so much by corrosive effect. 
 
 #### Procs (Programmed Random Occurence)
-Incendiary, Shock, Corrosive and Slag elemental effects happen based on random chance.  This is shown on the weapon card as "Corrode chance 37.5%" for example. This means that for every bullet or pellet that hits the target there is an x% chance that an elemental effect will occur.  We call these "procs".  Procs last for varying amounts of time (Fire: 5 sec, Shock: 2 sec, Corrosive and Slag: 8 sec).  Multiple procs can be in effect concurrently.  You can see this effect if you try your elemental weapon at Marcus's range.  Keep firing and watch the damage numbers flying off the unfortunate target multiply.    
+Incendiary, Shock, Corrosive and Slag elemental effects happen based on random chance.  This is shown on the weapon card as "Corrode chance 37.5%" for example. This means that for every bullet or pellet that hits the target there is an x% chance that an elemental effect will occur.  We call these "procs".  Procs last for varying amounts of time based on the elemental type.  Multiple procs can be in effect concurrently.  You can see this effect if you try your elemental weapon at Marcus's range.  Keep firing and watch the damage numbers flying off the unfortunate target multiply.
 
+In the spreadsheet caclulators I've seen elemental damage chance is simply applied as a factor.  This implies that every bullet does elemental damage but at a reduced rate based on the chance percentage.  It does not allow for concurrent procs or their timelines.  To better simulate elemental effects and their procs I took a different approach.  
+* I simulate 1000 firing cycles. A firing cycle consists of the time it takes to fire all the shots in the magazine plus the reload time.  I do 1000 cycle becasue of the random nature of the procs.  The first cycle might trigger no procs.  The 13th might trigger several.  If I do enough, I can average it out. 
+* Each second is divided into ticks because that is how BL2 handles time internally.  A tick in BL2 is 1/3 of a second. So 10 seconds equals 30 ticks.
+* The simulation is just a long list of 1's and zeros.  A 1 means the gun is firing during that tick and a zero means it isn't.
+* The code steps through each tick in the simulation list.
+* At each tick where firing is occuring it generates a random number and compares that the elemental chance. Think of this as rolling a many sided die. If the number you get is equal or less than the elemental chance then a proc is triggered.  For example, if the random number is 0.32 or 32% and the elemental chance is 45.2% then a proc is triggered.  Remember that multiple procs can be active at the same time.  The damage per tick assigned to the proc is 1/3 the elemental damage per second shown on the weapon card.  
+(TODO show the picture in an endnote?) 
+* At each tick the program sums up the elemental damage for all the active procs and reduces the time remaining on all of them by one tick. When a proc timer runs out, it is retired. 
+* The damage for each tick is accumulated over the entire simulation.  
 
-#### Incendiary Damage  
+$enet =$ accumulated elemental damage for 1000 cycles.   
+$fac =$ target damage factor from table above.  
+$ncycles =$ number of simulation cycles.  
+$cycle time =$ firing+reload cycle time.  
+
+Average elemental damage per second:
+$$\Large DPS_{elemental} = \frac{enet \cdot fac}{ncycles \cdot cycletime}$$
+
+#### Splash    
+All elemental effects have a "splash" characteristic.  This means that a poorly aimed shot might still damage the target.  It also means that when a proc triggers on a successful hit, nearby enemies might also be affected by the same elemental damage. 
+
+#### Incendiary Damage
+Highly effective against fleshy targets. 5 second duration.
+  
 #### Shock Damage
+Highly effective against shields. 2 second duration. 
+
 #### Corrosive damage
+Highly effective against armored targets. 8 second duration. 
+
 #### Slag damage
+Doubles other damage types once a target is slagged.  8 second duration.  
+
 #### Explosive damage
+Doubles kinetic damage.  Can cause splash explosive damage nearby targets. 
+
+### Total DPS
+The total DPS is simply:
+$$\Large DPS=DPS_{kinetic}+DPS_{elemental}$$
+The calculations above are repeated for each target type (flesh, shields and armor) and the results are shown in the main window.  An average of these 3 DPS numbers is also calculated and shown.  
 	
 ## What isn’t included (yet)  
 * Criticals
 * Buffs for character, relic, class mods, etc…
 
 ## Supported systems
-* MS Windows
+* MS Windows  
 
