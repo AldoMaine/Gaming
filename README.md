@@ -9,7 +9,7 @@ A basic Python app using the TkInter library to compute the damage per second (D
 * Download 'BL2 Damage Calculator.exe' to your PC. 
 * Double click 'BL2 Damage Calculator.exe' to start. (takes 15-20 seconds to start)  
 * Enter gun data from BL2 weapon card.  UI is designed to follow order of parameters seen on BL2 weapon cards.  
-* Click  'Calculate' to view predicted damage for each target type in UI.  
+* Click  'Calculate' to view predicted damage for each target type in UI.  (See 'Total DPS' below).
 * Click 'Save' to add this gun and it's damage results to a comparison table.  The comparison table will be shown in a new window.   
 * Using the main window, analyze and save other guns to the table as desired.   
 * The following functions are available in the compare window:
@@ -95,7 +95,7 @@ Doubles kinetic damage.  Can cause splash explosive damage nearby targets.
 ### Total DPS
 The total DPS is simply:
 $$\Large DPS=DPS_{kinetic}+DPS_{elemental}$$
-The calculations above are repeated for each target type (flesh, shields and armor) and the results are shown in the main window.  An average of these 3 DPS numbers is also calculated and shown.  
+The calculations above are repeated for each target type (flesh, shields and armor) and the results are shown in the main window.  An average of these 3 DPS numbers is also calculated and shown.  Since most elemental damage is based on chance, if you click on the 'Calculate' button repeatedly you will see differences in the resultant numbers each time for guns with elemental damage effects.  
 	
 ## What isn’t included (yet)  
 * Criticals
@@ -104,3 +104,10 @@ The calculations above are repeated for each target type (flesh, shields and arm
 ## Supported systems
 * MS Windows  
 
+## More on Procs
+Here is a visualization of the random nature of procs.  The elemental damage per second is 184 with a chance of 14.4% and a elemental duration of 8 seconds.   
+![Figure_1](https://user-images.githubusercontent.com/11415077/180614648-583e38b4-dfdc-466a-95f8-ee07f1a48ed3.png)  
+15 fire + reload cycles are shown.  The first proc triggers at ~10 ticks. Since the elemental damage is 184 dmg/sec the proc does about 61 dmg/tick. Just a few ticks later, another proc triggers and now we are seeing 122 dmg/tick. This increases again at ~20 ticks to 184 dmg/tick with 3 procs active.   At 34 ticks we see the first proc goes away after doing damage for 24 ticks (8 seconds).  This continues up and down for the rest of the 15 cycles as procs are triggered and expire.  
+I ran the simulation again with the same inputs.   
+![Figure_1a](https://user-images.githubusercontent.com/11415077/180615226-610873a8-8524-43ff-a95e-ff6c6f13c00f.png)  
+This is a good illustration of how the random nature of procs can affect how effective your gun is every time you use it.  In this second run, the elemental damage starts on the first firing cycle and builds up to a mighty 550 dmg/tick before dropping down to a level more like the first example.  This is why I simulate 1000 cycles then average the damage over them all.    
