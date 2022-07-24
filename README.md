@@ -25,7 +25,12 @@ Here is a typical weapon card for a gun in BL2.
 I designed the GUI for my damage app to follow the flow of the information on the weapon cards. 
 
 ### Basic Damage  
-Also called kinetic or projectile damage, it is the damage done purely by the bullets or pellets that hit the target.  For most guns a single "Damage" number is given.  A succcessful hit will do about this much damage to the target.  For some guns, especially shotguns, a second number is shown next to the damage, for example; "653 x 13".  The second number is the number of pellets.  For the example given, each "shot" fires 13 pellets, each of which does 653 damage. This impressive potential is rarely achieved since shotguns are not very accurate.   Some guns shoot multiple rounds per shot.  This is shown on the weapon card as "Consumes X ammo per shot".  This extra ammo you're shooting doesn't change the damage per shot, it's already factored in.  What it does is increase the rate of ammo usage and means you will burn through a magazine quicker.   
+Also called kinetic or projectile damage, it is the damage done purely by the bullets or pellets that hit the target.  For most guns a single "Damage" number is given.  A succcessful hit will do about this much damage to the target.  For some guns, especially shotguns, a second number is shown next to the damage, for example; "653 x 13".  The second number is the number of pellets (see Burst Mode below).  For the example given, each "shot" fires 13 pellets, each of which does 653 damage. This impressive potential is rarely achieved since shotguns are not very accurate.   Some guns shoot multiple rounds per shot.  This is shown on the weapon card as "Consumes X ammo per shot".  This extra ammo you're shooting doesn't change the damage per shot, it's already factored in.  What it does is increase the rate of ammo usage and means you will burn through a magazine quicker.  
+
+#### Burst Mode
+Some weapons fire multiple bullets per shot in a similar way to shotguns that have multiple pellets per shot.  This is shown the same way on the weapon card, e.g. "324 x 2".  This is typically accompanied by "Consumes 2 ammo per shot". The damage calculations are the same as for a shotgun.   
+Another type of burst mode is a weapon card that says "Burst mode while zoomed".   This will probably improve your fire rate while zoomed compared to pulling the trigger once per shot.  Unfortunately the card does not say how many rounds per burst, etc. so the app does not try to factor this in. 
+
 #### Definitions:  
 $dmg =$ damage from a single bullet or pellet.   
 $dpel =$ number of pellets per shot, shown as 'x dpel' on the weapon card.
@@ -63,6 +68,7 @@ In the spreadsheet caclulators I've seen elemental damage chance is simply appli
 (TODO show the picture in an endnote?) 
 * At each tick the program sums up the elemental damage for all the active procs and reduces the time remaining on all of them by one tick. When a proc timer runs out, it is retired. 
 * The damage for each tick is accumulated over the entire simulation.  
+See the section 'More on Procs' below for an illustration of how procs work. 
 
 $enet =$ accumulated elemental damage for 1000 cycles.   
 $fac =$ target damage factor from table above.  
