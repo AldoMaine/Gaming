@@ -38,8 +38,8 @@ Another type of burst mode is a weapon card that says "Burst fire while zoomed".
 
 #### Definitions  
 $dmg =$ damage from a single bullet or pellet.   
-$dpel =$ number of pellets per shot, shown as 'x dpel' on the weapon card.
-$acc =$ accuracy %.  A well aimed shot should hit the target this percent of the time.  Affected by distance to target and weapon zoom.  
+$dpel =$ number of pellets per shot, shown as 'x dpel' on the weapon card.  
+$acc =$ accuracy %.  See section on accuracy above.   Affected by distance to target and weapon zoom.  
 $fr =$ fire rate.  Maximum shots per second possible.  Semi-automatic guns (e.g. most pistols) require a trigger pull for each shot.  If you're slow on the trigger, you might not achieve the stated fire rate.   
 $rs =$ reload speed.  The time in seconds to reload the gun.   
 $mag =$ magazine size.  The number of rounds in a full magazine.  
