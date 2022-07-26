@@ -19,6 +19,7 @@ import sys
 import os
 import csv
 import random
+from math import ceil
 import tkinter as tk
 from tkinter import messagebox
 from tkinter import ttk
@@ -205,13 +206,13 @@ def calc_damage(ncycles=1000):
     if fr <= 0:
         on_error("Fire rate must be > 0.")
         return
-    
-    firing_time = mag / (fr * bpsh)    
+
+    shots_mag = ceil(mag / bpsh)  # note 1 in readme.md    
+    firing_time = shots_mag / fr  
     cycle_time = firing_time + rs
-    shots_mag = mag / bpsh
     
     # simulated firing cycle list (1 or 0 for ncycles * ticks/cycle)
-    # 1 = firing
+    #   1 = firing
     tick = 1/3  # seconds
     pellets_tick = fr * dpel * tick * acc/100  # pellets per tick
     firing_ticks = round(firing_time / tick)
@@ -244,7 +245,6 @@ def calc_damage(ncycles=1000):
                 if random.random() < prob:
                     procs.append(Proc(k_raw * dfac * tick, esec / tick))
     
-            # dmg = 0
             slag_dmg = 0
             # if any of the current Procs are active set slag_dmg to p.damage
             for p in procs:

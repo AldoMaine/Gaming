@@ -65,10 +65,11 @@ def elem_dmg(fr, dpel, firing_time, rs, edps, echa, esec, acc, dfactors,
     firing = [1]*firing_ticks + [0]*round(rs/tick)
     firing = firing * ncycles
     
-    data = []
+    all_data = []
 
     edpm = []  # elemental dmage per mag to flesh, shield and armor
     for dfac in dfactors:
+        data = []
         enet = 0     
         procs = []  # Proc list
         for i in range(len(firing)):
@@ -88,8 +89,9 @@ def elem_dmg(fr, dpel, firing_time, rs, edps, echa, esec, acc, dfactors,
             data.append(dmg)
             
         edpm.append(enet / ncycles)
+        all_data.append(data)
     
-    return edpm, data, firing
+    return edpm, all_data, firing
 
 
 def kinetic_dmg(dmg, dpel, mag, bpsh, acc, dfactors):
@@ -138,7 +140,7 @@ esec = 8
 dfactors = [.9, .75, 1.5] # corrosion damage to flesh, shields and armor
 
 bpsh = 2  # bullets per shot
-ncycles = 1000
+ncycles = 15
 
 
 
@@ -155,8 +157,11 @@ print("Cycle time {:.2f} sec.".format(firing_time + rs))
 print("Net DPS: {:.1f}".format((sum(netedmg)/3 + sum(netkdmg)/3)/ (firing_time + rs)))  # Avg Damage per second
 
 if ncycles < 21:
-    plt.bar(range(len(data)), data)
-    plt.bar(range(len(data)), [f*50 for f in firing])
+    
+    plt.bar(range(len(data[1])), data[1])
+    plt.bar(range(len(data[1])), [f*50 for f in firing])
+    plt.xlabel('ticks')
+    plt.ylabel('Damage')
        
       
  
