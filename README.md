@@ -36,7 +36,7 @@ The app uses accuracy as more of an effectiveness factor to reduce the theoretic
 Some weapons fire multiple bullets per shot in a similar way to shotguns that have multiple pellets per shot.  This is shown the same way on the weapon card, e.g. "324 x 2".  This is typically accompanied by "Consumes 2 ammo per shot". The damage calculations are the same as for a shotgun.   
 Another type of burst mode is a weapon card that says "Burst fire while zoomed".   This will probably improve your fire rate while zoomed compared to pulling the trigger once per shot.  Unfortunately the card does not say how many rounds per burst, etc. so the app does not try to factor this in. 
 
-#### Definitions:  
+#### Definitions  
 $dmg =$ damage from a single bullet or pellet.   
 $dpel =$ number of pellets per shot, shown as 'x dpel' on the weapon card.
 $acc =$ accuracy %.  A well aimed shot should hit the target this percent of the time.  Affected by distance to target and weapon zoom.  
@@ -46,7 +46,7 @@ $mag =$ magazine size.  The number of rounds in a full magazine.
 $bpsh =$ ammo per shot.  
 $fac =$ target damage factor.  For kinetic damage, the factors are 1.0 for flesh and shields and 0.8 for armor.  
   
-The time it takes to empty a full magazine:    $$\Large t_{firing}=\frac{mag}{fr \cdot  bpsh}$$  
+The time it takes to empty a full magazine (see Note 1):    $$\Large t_{firing}=\frac{mag}{fr \cdot  bpsh}$$  
 Average kinetic damage per second over a full firing+reload cycle:  
 $$\Large DPS_{kinetic} = \frac{fac \cdot dmg \cdot dpel \cdot \frac{mag}{bpsh} \cdot \frac{acc}{100}}{rs+t_{firing} }$$
 
@@ -120,3 +120,6 @@ Here is a visualization of the random nature of procs.  The elemental damage per
 I ran the simulation again with the same inputs.   
 ![Figure_1a](https://user-images.githubusercontent.com/11415077/180615226-610873a8-8524-43ff-a95e-ff6c6f13c00f.png)  
 This is a good illustration of how the random nature of procs can affect how effective your gun is every time you use it.  In this second run, the elemental damage starts on the first firing cycle and builds up to a mighty 550 dmg/tick before dropping down to a level more like the first example.  This is why I simulate 1000 cycles then average the damage over them all.    
+
+## Notes  
+[1] Let's says you have a magazine size of 5 and your gun uses 2 ammo per shot.  You should only get 2 shots per mag since after 2 shots you only have 1 round remaining.  But my tests show you get 3 shots.  Furthermore, you might think that extra shot would do half the normal damage since it would be one round instead of two.  But no, my tests show you get the same damage as a two round shot.   It appears that not only are shots per mag rounded up but an extra round is added from your inventory to make the shot a full two round shot.  
