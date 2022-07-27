@@ -355,6 +355,41 @@ def sort_damage():
         tree.move(item, '', index)
 
 
+def restore_gun():
+    """
+    Restore selected gun's parameters to main UI and recalculates damage.
+    """
+    selection = gun_comp.focus()
+    params = gun_comp.item(selection, 'values')
+    # insert these values into the main window
+    ent_name.delete(0, 'end')
+    ent_name.insert(0, params[0])
+    wtype.set(params[1])
+    dparms = params[2].split()
+    ent_damage.delete(0, 'end')
+    ent_damage.insert(0, dparms[0])
+    ent_pellets.delete(0, 'end')
+    ent_pellets.insert(0, dparms[2])
+    ent_acc.delete(0, 'end')
+    ent_acc.insert(0, params[3])
+    ent_fr.delete(0, 'end')
+    ent_fr.insert(0, params[4])
+    ent_rs.delete(0, 'end')
+    ent_rs.insert(0, params[5])
+    ent_mag.delete(0, 'end')
+    ent_mag.insert(0, params[6])
+    etype.set(params[7])    
+    ent_edmg.delete(0, "end")
+    ent_edmg.insert(0, params[8])
+    ent_echa.delete(0, "end")
+    ent_echa.insert(0, params[9])
+    ent_bps.delete(0, "end")
+    ent_bps.insert(0, params[10])
+    mfr.set(params[11])
+    
+    calc_damage()
+    
+
 def export():
     """export comparison table values to a csv file"""
     
@@ -642,12 +677,16 @@ btn_sort = tk.Button(frame2, text="   Sort   ", command=sort_damage)
 btn_sort.grid(row=1, column=2, sticky='ew', padx=10, pady=5)
 btn_sort.config(bg="sky blue", fg="black")
 
+btn_restore = tk.Button(frame2, text="  Restore Selected  ", command=restore_gun)
+btn_restore.grid(row=1, column=3, sticky='ew', padx=10, pady=5)
+btn_restore.config(bg="sky blue", fg="black")
+
 btn_del = tk.Button(frame2, text="   Delete Selected   ", command=delete_row)
-btn_del.grid(row=1, column=3, sticky='ew', padx=10, pady=5)
+btn_del.grid(row=1, column=4, sticky='ew', padx=10, pady=5)
 btn_del.config(bg="tomato2", fg="black")
 
 btn_clear = tk.Button(frame2, text="   Clear All   ", command=clear_compare)
-btn_clear.grid(row=1, column=4, sticky='ew', padx=10, pady=5)
+btn_clear.grid(row=1, column=5, sticky='ew', padx=10, pady=5)
 btn_clear.config(bg="tomato2", fg="black")
 
 #Create and bind tooltips
@@ -657,6 +696,8 @@ tip_exp = Pmw.Balloon(compare)
 tip_exp.bind(btn_export, "Export to csv file")
 tip_imp = Pmw.Balloon(compare)
 tip_imp.bind(btn_import, "Import from csv file")
+tip_restore = Pmw.Balloon(compare)
+tip_restore.bind(btn_restore, "Restore selected gun's parameters to main window")
 tip_clr = Pmw.Balloon(compare)
 tip_clr.bind(btn_clear, "Clear all items from table")
 tip_srt = Pmw.Balloon(compare)
